@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
-    Optional<Hotel> findHotelByName(String name);
+    Optional<Hotel> findByName(String name);
 
-    Optional<Hotel> findHotelById(long id);
+    Optional<Hotel> findById(long id);
 
     boolean existsByName(String name);
 }
