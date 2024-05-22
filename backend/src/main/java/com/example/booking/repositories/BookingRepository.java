@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-    Optional<Booking> findBookingById(long id);
+    Optional<Booking> findById(long id);
 
-    Optional<Booking> findBookingByUser(User user);
+    Optional<Booking> findByUser(User user);
 }
