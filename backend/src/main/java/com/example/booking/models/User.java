@@ -58,8 +58,7 @@ public class User {
             LocalDate dateOfBirth,
             String email,
             String address,
-            String idNumber,
-            String profileImage) {
+            String idNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
