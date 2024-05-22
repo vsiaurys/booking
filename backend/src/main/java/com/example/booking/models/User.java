@@ -6,8 +6,6 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import java.time.LocalDate;
-
 @Entity
 @Table(name = "Users")
 public class User {
@@ -35,8 +33,6 @@ public class User {
     @Pattern(regexp = "^(Male|Female|Other)$", message = "Gender must be Male, Female, or Other")
     private String gender;
 
-    private LocalDate dateOfBirth;
-
     @Column(unique = true)
     @NotEmpty(message = "Email cannot be empty")
     @Email(message = "Please provide a valid email address")
@@ -51,19 +47,11 @@ public class User {
     private String idNumber;
 
     public User(
-            long id,
-            String firstName,
-            String lastName,
-            String gender,
-            LocalDate dateOfBirth,
-            String email,
-            String address,
-            String idNumber) {
+            long id, String firstName, String lastName, String gender, String email, String address, String idNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.address = address;
         this.idNumber = idNumber;
@@ -71,9 +59,9 @@ public class User {
 
     public User() {}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    //    public void setId(long id) {
+    //        this.id = id;
+    //    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -85,10 +73,6 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public void setEmail(String email) {
@@ -117,10 +101,6 @@ public class User {
 
     public String getGender() {
         return gender;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
     }
 
     public String getEmail() {
