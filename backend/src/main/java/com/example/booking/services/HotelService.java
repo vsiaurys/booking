@@ -18,8 +18,8 @@ public class HotelService {
         return this.hotelRepository.save(hotel);
     }
 
-    public boolean existsHotelByName(String name) {
-        return hotelRepository.existsByName(name);
+    public boolean existsHotelByLocation(String location) {
+        return hotelRepository.existsByLocation(location);
     }
 
     public Optional<Hotel> findHotelByName(String name) {
