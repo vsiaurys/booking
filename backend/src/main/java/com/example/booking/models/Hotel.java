@@ -12,18 +12,18 @@ public class Hotel {
     private long id;
 
     @NotEmpty(message = "Hotel name cannot be empty")
-    @Size(min = 2, message = "The entered hotel name seems to be too short")
+    @Size(min = 2, message = "The entered hotel name must be at least 2 characters long")
     private String name;
 
-    @NotEmpty(message = "Location cannot be empty")
-    @Size(min = 5, message = "The entered location seems to be too short")
-    private String location;
+    @ManyToOne
+    @JoinColumn(name = "Location_id")
+    private Location location;
 
     @Size(max = 255, message = "Hotel image URL must be less than 255 characters")
     // @URL(message = "Invalid hotel image URL")
     private String picture;
 
-    public Hotel(String name, String location, String picture) {
+    public Hotel(String name, Location location, String picture) {
         this.name = name;
         this.location = location;
         this.picture = picture;
@@ -35,7 +35,7 @@ public class Hotel {
         this.name = name;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
@@ -51,7 +51,7 @@ public class Hotel {
         return name;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
