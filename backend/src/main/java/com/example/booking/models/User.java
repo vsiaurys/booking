@@ -46,9 +46,7 @@ public class User {
     @Size(min = 5, message = "The entered ID number seems to be too short")
     private String idNumber;
 
-    public User(
-            long id, String firstName, String lastName, String gender, String email, String address, String idNumber) {
-        this.id = id;
+    public User(String firstName, String lastName, String gender, String email, String address, String idNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -58,10 +56,6 @@ public class User {
     }
 
     public User() {}
-
-    //    public void setId(long id) {
-    //        this.id = id;
-    //    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
