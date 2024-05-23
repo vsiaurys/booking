@@ -3,7 +3,6 @@ package com.example.booking.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Table(name = "Hotels")
@@ -21,21 +20,16 @@ public class Hotel {
     private String location;
 
     @Size(max = 255, message = "Hotel image URL must be less than 255 characters")
-    @URL(message = "Invalid hotel image URL")
+    // @URL(message = "Invalid hotel image URL")
     private String picture;
 
-    public Hotel(long id, String name, String location, String picture) {
-        this.id = id;
+    public Hotel(String name, String location, String picture) {
         this.name = name;
         this.location = location;
         this.picture = picture;
     }
 
     public Hotel() {}
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public void setName(String name) {
         this.name = name;
