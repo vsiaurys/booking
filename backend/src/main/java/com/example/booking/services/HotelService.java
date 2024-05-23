@@ -3,9 +3,11 @@ package com.example.booking.services;
 import com.example.booking.models.Hotel;
 import com.example.booking.repositories.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class HotelService {
     private final HotelRepository hotelRepository;
 
