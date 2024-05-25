@@ -31,10 +31,12 @@ public class LocationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
 
+        Location savedLocation = this.locationService.saveLocation(location);
+
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
                         .path("/{id}")
-                        .buildAndExpand(location.getId())
+                        .buildAndExpand(savedLocation.getId())
                         .toUri())
-                .body(this.locationService.saveLocation(location));
+                .body(savedLocation);
     }
 }
