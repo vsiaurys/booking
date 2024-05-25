@@ -31,11 +31,12 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
 
+        User savedUser = this.userService.saveUser(user);
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
                         .path("/{id}")
-                        .buildAndExpand(user.getId())
+                        .buildAndExpand(savedUser.getId())
                         .toUri())
-                .body(this.userService.saveUser(user));
+                .body(savedUser);
     }
 
     //    @PostMapping("/login")
