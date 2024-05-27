@@ -6,6 +6,7 @@ import com.example.booking.repositories.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,16 +22,8 @@ public class HotelService {
         return this.hotelRepository.save(hotel);
     }
 
-    public boolean existsHotelByName(String name) {
-        return hotelRepository.existsByName(name);
-    }
-
-    public boolean existsHotelByLocation(Location location) {
+    public boolean existsHotelByLocation(String name, Location location) {
         return hotelRepository.existsByLocation(location);
-    }
-
-    public Optional<Hotel> findHotelByName(String name) {
-        return hotelRepository.findByName(name);
     }
 
     public Optional<Hotel> findHotelByLocation(Location location) {
@@ -39,5 +32,9 @@ public class HotelService {
 
     public Optional<Hotel> findHotelById(long id) {
         return hotelRepository.findById(id);
+    }
+
+    public List<Hotel> findAllHotels(String name) {
+        return hotelRepository.findByName(name);
     }
 }
