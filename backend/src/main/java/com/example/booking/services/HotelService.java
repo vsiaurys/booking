@@ -34,7 +34,7 @@ public class HotelService {
         return hotelRepository.findById(id);
     }
 
-    public List<Hotel> findAllHotels(String name) {
+    public List<Hotel> findAllHotelsByName(String name) {
         return hotelRepository.findByName(name);
     }
 }
