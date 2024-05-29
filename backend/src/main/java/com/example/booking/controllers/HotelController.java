@@ -69,18 +69,26 @@ public class HotelController {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
                 }
             }
+
+            hotel.setLocation(locationService.findLocationByName(location.getName()));
+            Hotel savedHotel = this.hotelService.saveHotel(hotel);
+
+            return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
+                            .path("/{id}")
+                            .buildAndExpand(savedHotel.getId())
+                            .toUri())
+                    .body(savedHotel);
+        } else {
+            //  Location not exists:
+            Location savedLocation = this.locationService.saveLocation(location);
+            hotel.setLocation(savedLocation);
+            Hotel savedHotel = this.hotelService.saveHotel(hotel);
+
+            return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
+                            .path("/{id}")
+                            .buildAndExpand(savedHotel.getId())
+                            .toUri())
+                    .body(savedHotel);
         }
-
-        //  Location not exists:
-        Location savedLocation = this.locationService.saveLocation(location);
-        hotel.setLocation(savedLocation);
-
-        Hotel savedHotel = this.hotelService.saveHotel(hotel);
-
-        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
-                        .path("/{id}")
-                        .buildAndExpand(savedHotel.getId())
-                        .toUri())
-                .body(savedHotel);
     }
  }
