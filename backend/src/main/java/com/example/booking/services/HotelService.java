@@ -5,6 +5,7 @@ import com.example.booking.repositories.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,10 @@ public class HotelService {
 
     public Hotel saveHotel(Hotel hotel) {
         return this.hotelRepository.save(hotel);
+    }
+
+    public List<Hotel> findAllHotels() {
+        return hotelRepository.findAll();
     }
 
     public Optional<Hotel> findHotelById(long id) {
