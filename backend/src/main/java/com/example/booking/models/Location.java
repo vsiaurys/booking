@@ -12,6 +12,7 @@ public class Location {
     private long id;
 
     @NotEmpty(message = "Location cannot be empty")
+    @Column(unique = true)
     @Pattern.List({
         @Pattern(regexp = "[A-Z].*", message = "Location name must start out of a letter in uppercase"),
         @Pattern(regexp = "[A-Za-z]+", message = "Locations name may contain only letters"),
