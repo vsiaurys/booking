@@ -20,13 +20,12 @@ public class LocationController {
         this.locationService = locationService;
     }
 
-    @PostMapping("/location")
+    @PostMapping("/locations")
     public ResponseEntity<Object> addLocation(@RequestBody Location location) {
         Map<String, String> errors = new HashMap<>();
 
         if (locationService.existsLocationByName(location.getName())) {
-
-            errors.put("location", "Location " + location.getName() + " already exists");
+            errors.put("name", "Location " + location.getName() + " already exists");
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
