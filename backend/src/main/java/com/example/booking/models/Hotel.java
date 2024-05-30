@@ -12,6 +12,7 @@ public class Hotel {
     private long id;
 
     @NotEmpty(message = "Hotel name cannot be empty")
+    @Column(unique = true)
     @Size(min = 2, message = "The entered hotel name must be at least 2 characters long")
     private String name;
 
@@ -21,7 +22,6 @@ public class Hotel {
 
     public Hotel(String name, String picture) {
         this.name = name;
-
         this.picture = picture;
     }
 
