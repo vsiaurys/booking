@@ -24,7 +24,7 @@ public class LocationService {
         return locationRepository.existsByName(name);
     }
 
-    public Location findLocationByName(String name) {
+    public Optional<Location> findLocationByName(String name) {
         return locationRepository.findByName(name);
     }
 
