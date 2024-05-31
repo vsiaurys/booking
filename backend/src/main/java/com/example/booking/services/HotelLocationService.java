@@ -1,6 +1,7 @@
 package com.example.booking.services;
 
 import com.example.booking.models.HotelLocation;
+import com.example.booking.models.HotelLocationId;
 import com.example.booking.repositories.HotelLocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
