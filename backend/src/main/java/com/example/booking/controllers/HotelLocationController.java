@@ -1,9 +1,12 @@
 package com.example.booking.controllers;
 
+import com.example.booking.models.HotelLocation;
 import com.example.booking.services.HotelLocationService;
 import com.example.booking.services.HotelService;
 import com.example.booking.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,9 +40,8 @@ public class HotelLocationController {
     //        return this.directorMovieService.findDirectorMovieById(directorMovieId);
     //    }
     //
-    //    @PostMapping("/directorsmovies")
-    //    public DirectorMovie insertDirectorMovie(@RequestBody DirectorMovie directorMovie) {
-    //        return this.directorMovieService.saveDirectorMovie(directorMovie);
-    //
-    //    }
+    @PostMapping("/hotelslocations")
+    public HotelLocation insertHotelLocation(@RequestBody HotelLocation hotelLocation) {
+        return this.hotelLocationService.saveHotelLocation(hotelLocation);
+    }
 }
