@@ -6,11 +6,11 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Hotels_Locations")
-public class HotelsLocations {
+public class HotelLocation {
     @EmbeddedId
     private HotelLocationId hotelLocationId;
 
-    public HotelsLocations(HotelLocationId hotelLocationId) {
+    public HotelLocation(HotelLocationId hotelLocationId) {
         this.hotelLocationId = hotelLocationId;
     }
 
