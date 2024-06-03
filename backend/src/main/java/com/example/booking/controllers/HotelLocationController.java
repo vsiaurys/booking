@@ -1,12 +1,14 @@
 package com.example.booking.controllers;
 
+import com.example.booking.models.Hotel;
 import com.example.booking.models.HotelLocation;
+import com.example.booking.models.HotelLocationId;
+import com.example.booking.models.Location;
 import com.example.booking.services.HotelLocationService;
 import com.example.booking.services.HotelService;
 import com.example.booking.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -41,7 +43,12 @@ public class HotelLocationController {
     //    }
     //
     @PostMapping("/hotelslocations")
-    public HotelLocation insertHotelLocation(@RequestBody HotelLocation hotelLocation) {
+    public HotelLocation insertHotelLocation() {
+        HotelLocation hotelLocation = new HotelLocation(
+                new HotelLocationId(new Hotel("Holiday Inn", "img/img.jpg"), new Location("Pagegiai")));
+        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
         return this.hotelLocationService.saveHotelLocation(hotelLocation);
     }
 }
