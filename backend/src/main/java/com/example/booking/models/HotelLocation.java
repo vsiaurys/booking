@@ -14,6 +14,8 @@ public class HotelLocation {
         this.hotelLocationId = hotelLocationId;
     }
 
+    public HotelLocation() {}
+
     public void setHotelLocationId(HotelLocationId hotelLocationId) {
         this.hotelLocationId = hotelLocationId;
     }
