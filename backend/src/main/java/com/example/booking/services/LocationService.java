@@ -5,8 +5,6 @@ import com.example.booking.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class LocationService {
     private final LocationRepository locationRepository;
@@ -24,11 +22,11 @@ public class LocationService {
         return locationRepository.existsByName(name);
     }
 
-    public Optional<Location> findLocationByName(String name) {
+    public Location findLocationByName(String name) {
         return locationRepository.findByName(name);
     }
 
-    public Optional<Location> findLocationById(long id) {
+    public Location findLocationById(long id) {
         return locationRepository.findById(id);
     }
 }
