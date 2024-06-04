@@ -10,7 +10,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 public class HotelController {
@@ -45,7 +44,7 @@ public class HotelController {
     }
 
     @GetMapping("/hotels/{id}")
-    public Optional<Hotel> getHotel(@PathVariable long id) {
+    public Hotel getHotel(@PathVariable long id) {
         return hotelService.findHotelById(id);
     }
  }
