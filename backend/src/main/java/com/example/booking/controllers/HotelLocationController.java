@@ -1,15 +1,16 @@
 package com.example.booking.controllers;
 
-import com.example.booking.models.Hotel;
 import com.example.booking.models.HotelLocation;
-import com.example.booking.models.HotelLocationId;
-import com.example.booking.models.Location;
 import com.example.booking.services.HotelLocationService;
 import com.example.booking.services.HotelService;
 import com.example.booking.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class HotelLocationController {
@@ -42,13 +43,25 @@ public class HotelLocationController {
     //        return this.directorMovieService.findDirectorMovieById(directorMovieId);
     //    }
     //
+    //    @PostMapping("/hotelslocations")
+    //    public HotelLocation insertHotelLocation(@RequestBody HotelLocation hotelLocation1) {
+    //        HotelLocation hotelLocation = new HotelLocation(
+    //                new HotelLocationId(new Hotel("Holiday Inn", "img/img.jpg"), new Location("Pagegiai")));
+    //
+    //        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+    //        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+    //        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+    //
+    //        return hotelLocation;
+    //    }
+
     @PostMapping("/hotelslocations")
-    public HotelLocation insertHotelLocation() {
-        HotelLocation hotelLocation = new HotelLocation(
-                new HotelLocationId(new Hotel("Holiday Inn", "img/img.jpg"), new Location("Pagegiai")));
-        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+    public HotelLocation insertHotelLocation(@RequestBody HotelLocation hotelLocation) {
         return this.hotelLocationService.saveHotelLocation(hotelLocation);
+    }
+
+    @GetMapping("/hotelslocations")
+    public List<HotelLocation> getAllHotelsLocations() {
+        return hotelLocationService.findAllHotelsLocations();
     }
 }
