@@ -1,14 +1,14 @@
 package com.example.booking.controllers;
 
+import com.example.booking.models.Hotel;
 import com.example.booking.models.HotelLocation;
+import com.example.booking.models.HotelLocationId;
+import com.example.booking.models.Location;
 import com.example.booking.services.HotelLocationService;
 import com.example.booking.services.HotelService;
 import com.example.booking.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,32 +28,16 @@ public class HotelLocationController {
         this.locationService = locationService;
     }
 
-    //    @GetMapping("/directorsmovies")
-    //    public List<DirectorMovie> getDirectorsMovies() {
-    //        return this.directorMovieService.findAllDirectorsMovies();
-    //    }
-    //
-    //    @GetMapping("/directors/{directorId}/movies/{movieId}")
-    //    public DirectorMovie getDirectorMovie(@PathVariable("directorId") long directorId, @PathVariable("movieId")
-    // long movieId) {
-    //        Director director = this.directorService.findDirectorById(directorId);
-    //        Movie movie = this.movieService.findMovieById(movieId);
-    //        DirectorMovieId directorMovieId = new DirectorMovieId(director, movie);
-    //
-    //        return this.directorMovieService.findDirectorMovieById(directorMovieId);
-    //    }
-    //
-    //    @PostMapping("/hotelslocations")
-    //    public HotelLocation insertHotelLocation(@RequestBody HotelLocation hotelLocation1) {
-    //        HotelLocation hotelLocation = new HotelLocation(
-    //                new HotelLocationId(new Hotel("Holiday Inn", "img/img.jpg"), new Location("Pagegiai")));
-    //
-    //        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-    //        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-    //        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-    //
-    //        return hotelLocation;
-    //    }
+    @GetMapping("/hotels/{hotelId}/locations/{locationId}")
+    public HotelLocation getHotelLocation(
+            @PathVariable("hotelId") long hotelId, @PathVariable("locationId") long locationId) {
+
+        Hotel hotel = this.hotelService.findHotelById(hotelId);
+        Location location = this.locationService.findLocationById(locationId);
+        HotelLocationId hotelLocationId = new HotelLocationId(hotel, location);
+
+        return this.hotelLocationService.findHotelLocationById(hotelLocationId);
+    }
 
     @PostMapping("/hotelslocations")
     public HotelLocation insertHotelLocation(@RequestBody HotelLocation hotelLocation) {
