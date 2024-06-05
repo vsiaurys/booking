@@ -61,7 +61,7 @@ public class HotelLocationController {
 
         HotelLocationId hotelLocationId = new HotelLocationId(hotel, location);
 
-        return ResponseEntity.ok().body(this.hotelLocationService.findHotelLocationById(hotelLocationId));
+        return ResponseEntity.ok(this.hotelLocationService.findHotelLocationById(hotelLocationId));
     }
 
     @PostMapping("/hotelslocations")
@@ -110,11 +110,19 @@ public class HotelLocationController {
         hotelLocation.getHotelLocationId().getHotel().setPicture(hotelPicture);
         hotelLocation.getHotelLocationId().getLocation().setName(locationName);
 
-        return ResponseEntity.ok().body(this.hotelLocationService.saveHotelLocation(hotelLocation));
+        return ResponseEntity.ok(this.hotelLocationService.saveHotelLocation(hotelLocation));
     }
 
     @GetMapping("/hotelslocations")
-    public List<HotelLocation> getAllHotelsLocations() {
-        return hotelLocationService.findAllHotelsLocations();
+    public ResponseEntity<?> getAllHotelsLocations() {
+        List<HotelLocation> listOfHotels = hotelLocationService.findAllHotelsLocations();
+
+        if (listOfHotels == null || listOfHotels.isEmpty()) {
+            Map<String, String> errors = new HashMap<>();
+            errors.put("hotelLocationId", "There are no hotels assigned to any location.");
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+        return ResponseEntity.ok(listOfHotels);
     }
 }
