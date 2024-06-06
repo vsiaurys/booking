@@ -53,7 +53,16 @@ public class HotelController {
     }
 
     @GetMapping("/hotels/{id}")
-    public Hotel getHotel(@PathVariable long id) {
-        return hotelService.findHotelById(id);
+    public ResponseEntity<Object> getHotel(@PathVariable long id) {
+        Hotel hotel = this.hotelService.findHotelById(id);
+
+        if (hotel == null) {
+            Map<String, String> errors = new HashMap<>();
+            errors.put("hotel", "Hotel with Id " + id + " does not exist");
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+
+        return ResponseEntity.ok(hotel);
     }
  }
