@@ -115,14 +115,14 @@ public class HotelLocationController {
 
     @GetMapping("/hotelslocations")
     public ResponseEntity<?> getAllHotelsLocations() {
-        List<HotelLocation> listOfHotels = hotelLocationService.findAllHotelsLocations();
+        List<HotelLocation> listOfHotelsLocations = hotelLocationService.findAllHotelsLocations();
 
-        if (listOfHotels == null || listOfHotels.isEmpty()) {
+        if (listOfHotelsLocations == null || listOfHotelsLocations.isEmpty()) {
             Map<String, String> errors = new HashMap<>();
             errors.put("hotelLocationId", "There are no hotels assigned to any location.");
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
-        return ResponseEntity.ok(listOfHotels);
+        return ResponseEntity.ok(listOfHotelsLocations);
     }
 }
