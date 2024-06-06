@@ -39,8 +39,17 @@ public class HotelController {
     }
 
     @GetMapping("/hotels")
-    public List<Hotel> getAllHotels() {
-        return hotelService.findAllHotels();
+    public ResponseEntity<?> getAllHotels() {
+
+        List<Hotel> listOfHotels = hotelService.findAllHotels();
+
+        if (listOfHotels == null || listOfHotels.isEmpty()) {
+            Map<String, String> errors = new HashMap<>();
+            errors.put("hotel", "The list of hotels is empty.");
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+        return ResponseEntity.ok(listOfHotels);
     }
 
     @GetMapping("/hotels/{id}")
