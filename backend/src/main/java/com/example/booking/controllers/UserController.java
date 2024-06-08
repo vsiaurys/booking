@@ -4,12 +4,14 @@ import com.example.booking.models.User;
 import com.example.booking.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 // @CrossOrigin(origins = "http://localhost:5173")
@@ -39,6 +41,19 @@ public class UserController {
                 .body(savedUser);
     }
 
+    @GetMapping("/users")
+    public ResponseEntity<?> getAllUsers() {
+
+        List<User> listOfUsers = userService.findAllUsers();
+
+        if (listOfUsers == null || listOfUsers.isEmpty()) {
+            Map<String, String> errors = new HashMap<>();
+            errors.put("user", "The list of users is empty.");
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+        return ResponseEntity.ok(listOfUsers);
+    }
     //    @PostMapping("/login")
     //    public ResponseEntity<?> login(@RequestBody User user) throws JsonProcessingException {
     //        Optional<User> userOptional = userService.findUserByEmail(user.getEmail());
@@ -86,15 +101,7 @@ public class UserController {
     //        Optional<User> userOptional = userService.findUserById(id);
     //        Optional<User> checkIfEmailInDatabase = userService.findUserByEmail(userDto.getEmail());
     //        boolean checkIfDisplayNameInDatabase = userService.existsUserByDisplayName(userDto.getDisplayName());
-    //
-    //        if (checkIfDisplayNameInDatabase
-    //                && !Objects.equals(
-    //                userDto.getDisplayName(),
-    //                userService.findUserById(id).get().getDisplayName())) {
-    //            Map<String, String> errorMap = new HashMap<>();
-    //            errorMap.put("error", "User with this display name already exists.");
-    //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMap);
-    //        }
+
     //
     //        if (checkIfEmailInDatabase.isPresent() && !Objects.equals(authenticatedEmail, userDto.getEmail())) {
     //            Map<String, String> errorMap = new HashMap<>();
