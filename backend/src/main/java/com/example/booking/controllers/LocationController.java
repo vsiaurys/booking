@@ -4,10 +4,7 @@ import com.example.booking.models.Location;
 import com.example.booking.services.LocationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.HashMap;
@@ -53,5 +50,19 @@ public class LocationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
         return ResponseEntity.ok(listOfLocations);
+    }
+
+    @GetMapping("/locations/{id}")
+    public ResponseEntity<Object> getLocation(@PathVariable long id) {
+        Location location = this.locationService.findLocationById(id);
+
+        if (location == null) {
+            Map<String, String> errors = new HashMap<>();
+            errors.put("location", "Location with Id " + id + " does not exist");
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+
+        return ResponseEntity.ok(location);
     }
 }
