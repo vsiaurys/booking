@@ -29,7 +29,7 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public Optional<User> findUserById(long id) {
+    public User findUserById(long id) {
         return userRepository.findById(id);
     }
 
