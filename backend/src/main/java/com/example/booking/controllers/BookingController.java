@@ -1,10 +1,18 @@
 package com.example.booking.controllers;
 
+import com.example.booking.models.Booking;
 import com.example.booking.services.BookingService;
 import com.example.booking.services.HotelService;
 import com.example.booking.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 public class BookingController {
@@ -99,17 +107,17 @@ public class BookingController {
     //
     //        return ResponseEntity.ok(this.hotelLocationService.saveHotelLocation(hotelLocation));
     //    }
-    //
-    //    @GetMapping("/hotelslocations")
-    //    public ResponseEntity<?> getAllHotelsLocations() {
-    //        List<HotelLocation> listOfHotelsLocations = hotelLocationService.findAllHotelsLocations();
-    //
-    //        if (listOfHotelsLocations == null || listOfHotelsLocations.isEmpty()) {
-    //            Map<String, String> errors = new HashMap<>();
-    //            errors.put("hotelLocationId", "There are no hotels assigned to any location.");
-    //
-    //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
-    //        }
-    //        return ResponseEntity.ok(listOfHotelsLocations);
-    //    }
+
+    @GetMapping("/bookings")
+    public ResponseEntity<?> getAllBookings() {
+        List<Booking> listOfBookings = bookingService.findAllBookings();
+
+        if (listOfBookings == null || listOfBookings.isEmpty()) {
+            Map<String, String> errors = new HashMap<>();
+            errors.put("id", "The list of bookings is empty");
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+        return ResponseEntity.ok(listOfBookings);
+    }
 }
