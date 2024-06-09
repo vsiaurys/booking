@@ -5,6 +5,7 @@ import com.example.booking.models.User;
 import com.example.booking.repositories.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Optional;
 
 public class BookingService {
@@ -25,5 +26,9 @@ public class BookingService {
 
     public Optional<Booking> findBookingById(long id) {
         return bookingRepository.findById(id);
+    }
+
+    public List<Booking> findAllBookings() {
+        return bookingRepository.findAll();
     }
 }
