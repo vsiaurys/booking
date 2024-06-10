@@ -1,6 +1,8 @@
 package com.example.booking.controllers;
 
 import com.example.booking.models.Booking;
+import com.example.booking.models.Hotel;
+import com.example.booking.models.User;
 import com.example.booking.services.BookingService;
 import com.example.booking.services.HotelService;
 import com.example.booking.services.UserService;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -58,55 +62,38 @@ public class BookingController {
     //
     //        return ResponseEntity.ok(this.hotelLocationService.findHotelLocationById(hotelLocationId));
     //    }
-    //
-    //    @PostMapping("/hotelslocations")
-    //    public ResponseEntity<Object> insertHotelLocation(@RequestBody HotelLocation hotelLocation) {
-    //        Map<String, String> errors = new HashMap<>();
-    //
-    //        long hotelId = hotelLocation.getHotelLocationId().getHotel().getId();
-    //        long locationId = hotelLocation.getHotelLocationId().getLocation().getId();
-    //
-    //        Hotel hotel = this.hotelService.findHotelById(hotelId);
-    //        Location location = this.locationService.findLocationById(locationId);
-    //
-    //        if (hotel == null && location == null) {
-    //            errors.put("hotel", "Hotel with Id " + hotelId + " does not exist");
-    //            errors.put("location", "Location with Id " + locationId + " does not exist");
-    //
-    //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
-    //        }
-    //
-    //        if (hotel == null) {
-    //            errors.put("hotel", "Hotel with Id " + hotelId + " does not exist");
-    //
-    //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
-    //        }
-    //
-    //        if (location == null) {
-    //            errors.put("location", "Location with Id " + locationId + " does not exist");
-    //
-    //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
-    //        }
-    //
-    //        String hotelName = hotelService.findHotelById(hotelId).getName();
-    //        String locationName = locationService.findLocationById(locationId).getName();
-    //
-    //        if (hotelLocationService.existsHotelLocationById(hotelLocation.getHotelLocationId())) {
-    //            errors.put("hotelLocationId", "Hotel " + hotelName + " in " + locationName + " already exists");
-    //
-    //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
-    //        }
-    //
-    //        String hotelPicture = hotelService
-    //                .findHotelById(hotelLocation.getHotelLocationId().getHotel().getId())
-    //                .getPicture();
-    //
-    //        hotelLocation.getHotelLocationId().getHotel().setName(hotelName);
-    //        hotelLocation.getHotelLocationId().getHotel().setPicture(hotelPicture);
-    //        hotelLocation.getHotelLocationId().getLocation().setName(locationName);
-    //
-    //        return ResponseEntity.ok(this.hotelLocationService.saveHotelLocation(hotelLocation));
-    //    }
+
+    @PostMapping("/bookings")
+    public ResponseEntity<Object> insertBooking(@RequestBody Booking booking) {
+        Map<String, String> errors = new HashMap<>();
+
+        long hotelId = booking.getHotel().getId();
+        long userId = booking.getUser().getId();
+
+        Hotel hotel = this.hotelService.findHotelById(hotelId);
+        User user = this.userService.findUserById(userId);
+
+        if (hotel == null && user == null) {
+            errors.put("hotel", "Hotel with Id " + hotelId + " does not exist");
+            errors.put("user", "User with Id " + userId + " does not exist");
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+
+        if (hotel == null) {
+            errors.put("hotel", "Hotel with Id " + hotelId + " does not exist");
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+
+        if (user == null) {
+            errors.put("user", "User with Id " + userId + " does not exist");
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+
+        return ResponseEntity.ok(this.bookingService.saveBooking(booking));
+    }
 
     @GetMapping("/bookings")
     public ResponseEntity<?> getAllBookings() {
