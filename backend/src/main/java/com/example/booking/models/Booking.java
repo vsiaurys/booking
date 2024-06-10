@@ -1,7 +1,9 @@
 package com.example.booking.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -22,24 +24,25 @@ public class Booking {
     @JoinColumn(name = "Hotel_id")
     private Hotel hotel;
 
-    @NotEmpty(message = "Start date of a booking cannot be empty")
+    // @NotEmpty(message = "Start date of a booking cannot be empty")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
-    @NotEmpty(message = "End date of a booking cannot be empty")
+    // @NotEmpty(message = "End date of a booking cannot be empty")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
     @NotEmpty(message = "Room type cannot be empty")
     @Pattern(regexp = "^(Standard|Deluxe|Suite)$", message = "Room type must be Standard, Deluxe or Suite")
     private String roomType;
 
-    @NotEmpty(message = "Breakfast cannot be empty")
+    @NotNull(message = "Breakfast cannot be empty")
     private boolean breakfast;
 
     @Size(max = 255, message = "Comment must be less than 255 characters")
     private String comment;
 
     public Booking(
-            long id,
             User user,
             Hotel hotel,
             LocalDate startDate,
@@ -47,7 +50,7 @@ public class Booking {
             String roomType,
             boolean breakfast,
             String comment) {
-        this.id = id;
+
         this.user = user;
         this.hotel = hotel;
         this.startDate = startDate;
@@ -58,10 +61,6 @@ public class Booking {
     }
 
     public Booking() {}
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public void setUser(User user) {
         this.user = user;
