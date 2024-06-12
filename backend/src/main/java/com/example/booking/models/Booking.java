@@ -18,17 +18,19 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "User_id")
+    @NotNull(message = "User cannot be null")
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "Hotel_id")
+    @NotNull(message = "Hotel cannot be null")
     private Hotel hotel;
 
-    // @NotEmpty(message = "Start date of a booking cannot be empty")
+    @NotNull(message = "Start date of a booking cannot be empty")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
-    // @NotEmpty(message = "End date of a booking cannot be empty")
+    @NotNull(message = "End date of a booking cannot be empty")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
