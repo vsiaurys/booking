@@ -26,7 +26,7 @@ public class BookingService {
         return bookingRepository.findByUser(user);
     }
 
-    public Optional<Booking> findBookingById(long id) {
+    public Booking findBookingById(long id) {
         return bookingRepository.findById(id);
     }
 
