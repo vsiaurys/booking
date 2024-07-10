@@ -17,9 +17,9 @@ export default function Footer() {
             <li>
               <a
                 className="contact-email"
-                href="mailto:vardas.pavarde@gmail.com"
+                href="mailto:hotel.booking.platform@gmail.com"
               >
-                vardas.pavarde@gmail.com
+                hotel.booking.platform@gmail.com@gmail.com
               </a>
             </li>
           </ul>
