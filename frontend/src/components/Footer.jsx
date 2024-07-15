@@ -19,7 +19,7 @@ export default function Footer() {
                 className="contact-email"
                 href="mailto:hotel.booking.platform@gmail.com"
               >
-                hotel.booking.platform@gmail.com@gmail.com
+                hotel.booking.platform@gmail.com
               </a>
             </li>
           </ul>
@@ -27,8 +27,8 @@ export default function Footer() {
 
         <div className="col-5 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-end">
           <ul className="list-unstyled">
-            <li>Trinapolio g. 2, Vilnius</li>
-            <li>+370 5 269 7455</li>
+            <li>Address in Vilnius</li>
+            <li>+370 5 123 4567</li>
           </ul>
         </div>
       </div>
