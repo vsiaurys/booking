@@ -11,9 +11,7 @@ export default function App() {
     <div className="d-flex flex-column min-vh-100">
       <Header />
       <Main />
-      <footer className="mt-auto footer">
-        <Footer />
-      </footer>
+      <Footer />
     </div>
   );
 }
